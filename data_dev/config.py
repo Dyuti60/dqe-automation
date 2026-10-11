@@ -98,8 +98,8 @@ postgres_config = PostgresConfig(
     user='myuser',
     password='mypassword',
     db='mydatabase',
-    port=5432,  # localhost:5434,  podman_network:5432
-    host='postgres'  # localhost:localhost, podman_network:postgres
+    port=5438,  # localhost:5434,  podman_network:5432
+    host='localhost'  # localhost:localhost, podman_network:postgres
 )
 
 # Instance of GeneratorConfig
