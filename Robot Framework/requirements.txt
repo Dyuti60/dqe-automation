@@ -1,5 +1,6 @@
 robotframework
 robotframework-seleniumlibrary
+selenium
 pandas
 pyarrow
-selenium
+pytest

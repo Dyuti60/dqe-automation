@@ -1,1 +1,9 @@
-results
+.venv/
+__pycache__/
+.pytest_cache/
+results/
+validation_results/
+robot-framework-results.zip
+*.pyc
+*.parquet
+parquet_data/
