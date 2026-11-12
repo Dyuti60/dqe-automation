@@ -12,6 +12,8 @@ source .venv/Scripts/activate
 python -m pip install -r requirements.txt
 ```
 
+The dependencies include `pytest-reportportal`, but ReportPortal remains disabled unless the `--reportportal` option is supplied.
+
 ## Required test commands
 
 Run all tests. The default setting in `pytest.ini` writes the report to `reports/all-tests/report.html`.
@@ -35,6 +37,36 @@ python -m pytest -m "validate_csv and not xfail" \
 ```
 
 The `-o addopts=...` option gives each filtered run its own report path instead of overwriting the default all-tests report.
+
+## Optional ReportPortal execution
+
+`pytest.ini` contains the ReportPortal endpoint, launch name, log level, and a project placeholder. Replace `REPLACE_WITH_ACTUAL_PROJECT` with the assigned ReportPortal project before attempting an upload. Do not store authentication credentials in this repository.
+
+In PowerShell, capture the API key without displaying it and expose it only to the current process environment:
+
+```powershell
+$secureKey = Read-Host "ReportPortal API key" -AsSecureString
+$env:RP_API_KEY = [System.Net.NetworkCredential]::new("", $secureKey).Password
+```
+
+After the project value is configured, start an explicitly enabled ReportPortal run:
+
+```powershell
+python -m pytest --reportportal
+```
+
+Normal local execution remains independent of ReportPortal:
+
+```powershell
+python -m pytest
+```
+
+Remove the process-scoped credential after use:
+
+```powershell
+Remove-Item Env:RP_API_KEY
+Remove-Variable secureKey
+```
 
 When finished, leave the virtual environment with:
 
